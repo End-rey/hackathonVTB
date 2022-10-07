@@ -2,9 +2,7 @@ package com.irvaglan.hackathon.Entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -14,22 +12,20 @@ public class Headline {
     @Id
     @GeneratedValue
     private int id;
+    @OneToOne(mappedBy = "headline", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private NLP nlp;
     @NotNull
     private String name;
     @NotNull
     private String description;
     @NotNull
-    private String trends;
-    @NotNull
-    private String insights;
-    @NotNull
-    private String jobs;
+    private String url;
 
-//    public Headline(String name, String description, String trends, String insights, String jobs) {
-//        this.name = name;
-//        this.description = description;
-//        this.trends = trends;
-//        this.insights = insights;
-//        this.jobs = jobs;
-//    }
+
+    public Headline(String name, String description, String url) {
+        this.name = name;
+        this.description = description;
+        this.url = url;
+    }
 }

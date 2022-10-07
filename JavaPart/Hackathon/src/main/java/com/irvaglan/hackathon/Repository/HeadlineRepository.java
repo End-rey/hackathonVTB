@@ -6,7 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HeadlineRepository extends CrudRepository<Headline, String> {
-
-//    public boolean existsHeadlineByJob(String job);
-
 }
