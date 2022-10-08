@@ -1,1 +1,4 @@
 /parser/venv/
+/parser/__pycache__/
+/NLP/__pycache__/
+/NLP/.idea/

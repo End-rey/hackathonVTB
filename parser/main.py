@@ -1,27 +1,35 @@
-from multiprocessing.dummy import Pool
-from bs4 import BeautifulSoup
-import requests
 import multiprocessing
-import time
+from xaker import parse_xaker
+from tzh import parse_tzh
+from cossa import parse_cossa
+from consultant import parse_consulant
+from database import insert
 
 
 def main():
-    now1 = time.time()
-
     pool = multiprocessing.Pool(multiprocessing.cpu_count())
 
-    pool.map(parse, range(1, 3))
+    # a = pool.map(parse_xaker, range(1, 67))
+    # b = pool.map(parse_tzh, range(1, 37))
+    a = pool.map(parse_cossa, range(1, 65))
+    b = pool.map(parse_consulant, range(1, 400))
+
+    
+
+    i = 3512
+    data = []
+    for arr in a:
+        for headline in arr:
+            data.append((i, headline['name'], headline['description'], headline['url']))
+            i += 1
+    for arr in b:
+        for headline in arr:
+            data.append((i, headline['name'], headline['description'], headline['url']))
+            i += 1
+
+    insert(data)
+
     pool.close()
-
-
-def parse(i: int):
-    body = requests.get('https://xakep.ru/page/' + str(i)).content
-    soup = BeautifulSoup(body, features="html.parser").find(
-        "div", class_="bdaia-blocks-container")
-    entry_titles = soup.find_all("h3", class_="entry-title")
-    for j, entry in enumerate(entry_titles):
-        body1 = requests.get(entry.a["href"]).content
-        print('headline №', j, "page №", i)
 
 
 if __name__ == "__main__":
