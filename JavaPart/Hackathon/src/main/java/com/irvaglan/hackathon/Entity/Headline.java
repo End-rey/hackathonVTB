@@ -6,14 +6,16 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
+@Table(name = "headlines")
 public class Headline {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne(mappedBy = "headline", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "headline")
     private NLP nlp;
     @NotNull
     private String name;
@@ -21,7 +23,6 @@ public class Headline {
     private String description;
     @NotNull
     private String url;
-
 
     public Headline(String name, String description, String url) {
         this.name = name;

@@ -1,19 +1,24 @@
 package com.irvaglan.hackathon.Entity;
 
 import lombok.*;
+import org.springframework.stereotype.Controller;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 @NoArgsConstructor
+@Table(name = "nlps")
 public class NLP {
     @Id
-    @GeneratedValue
+    @Column(name = "headline_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
-    @MapsId
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "headline_id")
     private Headline headline;
     @NotNull
@@ -24,8 +29,7 @@ public class NLP {
     private String job;
 
 
-    public NLP(Headline headline, String trend, String insight, String job) {
-        this.headline = headline;
+    public NLP(String trend, String insight, String job) {
         this.trend = trend;
         this.insight = insight;
         this.job = job;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface NLPRepository  extends CrudRepository<NLP, String> {
+public interface NLPRepository  extends CrudRepository<NLP, Integer> {
 
     List<NLP> findNLPSByJob(String job);
 
