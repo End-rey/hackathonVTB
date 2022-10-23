@@ -1,0 +1,54 @@
+.arrow {
+  cursor: pointer;
+  height: 50px;
+  transform: translateX(-50%) translateY(-50%);
+  transition: transform 0.1s;
+  width: 30px;
+  margin: 5vh 0 0 5vh;
+}
+.arrow_top, .arrow_bottom {
+  background-color: rgb(30, 67, 180);
+  height: 4px;
+  left: -25px;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+.arrow_top:after, .arrow_bottom:after {
+  background-color: #fff;
+  content: "";
+  height: 100%;
+  position: absolute;
+  top: 0;
+  transition: all 0.15s;
+}
+.arrow_top {
+  transform: rotate(-135deg);
+  transform-origin: bottom right;
+  height: 4px;
+}
+.arrow_top:after {
+  left: 100%;
+  right: 0;
+  transition-delay: 0s;
+}
+.arrow_bottom {
+  transform: rotate(135deg);
+  transform-origin: bottom right;
+}
+.arrow_bottom:after {
+  left: 0;
+  right: 100%;
+  transition-delay: 0.15s;
+}
+.arrow:hover .arrow_top:after {
+  left: 0;
+  transition-delay: 0.15s;
+}
+.arrow:hover .arrow_bottom:after {
+  right: 0;
+  transition-delay: 0s;
+}
+.arrow:active {
+  transform: translateX(-50%) translateY(-50%) scale(0.9);
+}/*# sourceMappingURL=ArrowBtn.module.css.map */

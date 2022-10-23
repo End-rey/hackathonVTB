@@ -20,4 +20,8 @@ public class HeadlineService {
         return StreamSupport.stream(repository.findAll().spliterator(), false).collect(Collectors.toList());
     }
 
+    public Headline findById(int id) {
+        return repository.findById(id);
+    }
+
 }
